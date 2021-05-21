@@ -12,7 +12,8 @@ body {
 
 .wrapper {
     margin: 0 auto;
-    width: 1280px;
+    padding: 0.5rem;
+    width: 100%;
 }
 
 .card {
@@ -36,7 +37,7 @@ body {
 
 .row {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 1rem;
     justify-content: space-between;
     width: 100%;
@@ -65,7 +66,7 @@ input {
 }
 
 .fd-c {
-    flex-direction: column;
+    flex-direction: column !important;
 }
 
 .ml-1 {
@@ -153,4 +154,32 @@ input {
 .card label:active {
     box-shadow: none;
     top: 3px;
+}
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .wrapper {
+        width: 740px;
+    }
+
+    .row {
+        flex-direction: row;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .wrapper {
+        width: 1150px;
+    }
 }
