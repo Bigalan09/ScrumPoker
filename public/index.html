@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scrum Voting Poker</title>
+
+  <!-- update the version number as needed -->
+  <script defer src="/__/firebase/8.6.1/firebase-app.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script defer src="/__/firebase/8.6.1/firebase-auth.js"></script>
+  <script defer src="/__/firebase/8.6.1/firebase-database.js"></script>
+  <script defer src="/__/firebase/8.6.1/firebase-firestore.js"></script>
+  <script defer src="/__/firebase/8.6.1/firebase-functions.js"></script>
+  <script defer src="/__/firebase/8.6.1/firebase-messaging.js"></script>
+  <script defer src="/__/firebase/8.6.1/firebase-storage.js"></script>
+  <script defer src="/__/firebase/8.6.1/firebase-analytics.js"></script>
+  <script defer src="/__/firebase/8.6.1/firebase-remote-config.js"></script>
+  <script defer src="/__/firebase/8.6.1/firebase-performance.js"></script>
+  <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+  <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap"
+    rel="stylesheet">
+  <link href="css/main.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <h1 class="title">Scrum Voting Poker</h1>
+    <div class="row">
+      <div class="col mr-1">
+        <h2>Players</h2>
+        <ul>
+          <li>Alan</li>
+        </ul>
+      </div>
+      <div class="col cards fb-50">
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <input type="radio" name="card" id="cb0" /><label for="cb0">0</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <input type="radio" name="card" id="cb1" /><label for="cb1">0.5</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <input type="radio" name="card" id="cb2" /><label for="cb2">1</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <input type="radio" name="card" id="cb3" /><label for="cb3">2</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <input type="radio" name="card" id="cb4" /><label for="cb4">3</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <input type="radio" name="card" id="cb5" /><label for="cb5">5</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <input type="radio" name="card" id="cb6" /><label for="cb6">8</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <input type="radio" name="card" id="cb7" /><label for="cb7">13</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <input type="radio" name="card" id="cb8" /><label for="cb8">20</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <input type="radio" name="card" id="cb9" /><label for="cb9">40</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <input type="radio" name="card" id="cb10" /><label for="cb10">?</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <input type="radio" name="card" id="cb11" /><label for="cb11">☕</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <canvas id="myChart" width="400" height="400"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col fb-20 ml-1">
+        <div class="row fd-c">
+          <div class="col">
+            <input type="text" placeholder="Room Name" />
+          </div>
+          <div class="col">
+            <button class="button start">Start Voting</button>
+            <button class="button finish">Finish Voting</button>
+          </div>
+          <div class="col">
+            &nbsp;
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+      // // The Firebase SDK is initialized and available here!
+      //
+      // firebase.auth().onAuthStateChanged(user => { });
+      // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+      // firebase.firestore().doc('/foo/bar').get().then(() => { });
+      // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+      // firebase.messaging().requestPermission().then(() => { });
+      // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+      // firebase.analytics(); // call to activate
+      // firebase.analytics().logEvent('tutorial_completed');
+      // firebase.performance(); // call to activate
+      //
+      // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+      try {
+        let app = firebase.app();
+        let features = [
+          'auth',
+          'database',
+          'firestore',
+          'functions',
+          'messaging',
+          'storage',
+          'analytics',
+          'remoteConfig',
+          'performance',
+        ].filter(feature => typeof app[feature] === 'function');
+
+        init(app);
+
+      } catch (e) {
+        console.error(e);
+        loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+      }
+    });
+
+    const init = (app) => {
+      const ctx = document.getElementById('myChart').getContext('2d');
+      const myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+              'rgb(255, 99, 132)',
+              'rgb(54, 162, 235)',
+              'rgb(255, 206, 86)',
+              'rgb(75, 192, 192)',
+              'rgb(153, 102, 255)',
+              'rgb(255, 159, 64)'
+            ],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins:
+          {
+            legend: {
+              position: 'right',
+            },
+            title: {
+              display: false,
+            }
+          }
+        }
+      });
+    };
+  </script>
+</body>
+
+</html>
