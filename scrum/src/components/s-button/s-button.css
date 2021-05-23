@@ -3,23 +3,21 @@
 }
 
 .btn {
-  outline: none;
-  border: 0;
-  padding: 1rem 3rem;
+  @apply font-bold py-2 px-4 rounded border-0 shadow mt-1 mb-1 w-full uppercase;
 }
 
 .btn.primary {
-  background-color: var(--primary);
+  @apply bg-red-500 text-white;
 }
 
 .btn.primary:hover {
-  background-color: var(--primary-10);
+  @apply bg-red-700;
 }
 
 .btn.secondary {
-  background-color: var(--secondary);
+  @apply bg-green-500 text-white;
 }
 
 .btn.secondary:hover {
-  background-color: var(--secondary-10);
+  @apply bg-green-700;
 }

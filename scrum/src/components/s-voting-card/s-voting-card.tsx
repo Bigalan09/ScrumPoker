@@ -3,7 +3,7 @@ import { Component, h, Prop } from '@stencil/core';
 @Component({
   tag: 's-voting-card',
   styleUrl: 's-voting-card.css',
-  shadow: true,
+  shadow: false,
 })
 export class SVotingCard {
 
@@ -11,7 +11,9 @@ export class SVotingCard {
 
   render() {
     return (
-      <div>{this.value}</div>
+      <div class="card">
+        <input type="radio" name="card" id={this.value} /><label htmlFor={this.value}>{this.value}</label>
+      </div>
     );
   }
 
