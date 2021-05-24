@@ -7,11 +7,11 @@ import { Component, h } from '@stencil/core';
 })
 export class SVotingDeck {
 
-  private _sequence: string[] = ['0', '0.5', '1', '2', '3', '5', '8', '13', '20', '40'];
+  private _sequence: string[] = ['0', '0.5', '1', '2', '3', '5', '8', '13', '20', '40', '?', '☕'];
 
   render() {
     return (
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-2">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-2 mb-3">
         {this._sequence.map((val) =>
           <s-voting-card key={val} value={val}></s-voting-card>
         )}

@@ -9,6 +9,8 @@ export namespace Components {
     interface SButton {
         "appearance": any;
     }
+    interface SDashboard {
+    }
     interface SVotingCard {
         "value": string;
     }
@@ -21,6 +23,12 @@ declare global {
     var HTMLSButtonElement: {
         prototype: HTMLSButtonElement;
         new (): HTMLSButtonElement;
+    };
+    interface HTMLSDashboardElement extends Components.SDashboard, HTMLStencilElement {
+    }
+    var HTMLSDashboardElement: {
+        prototype: HTMLSDashboardElement;
+        new (): HTMLSDashboardElement;
     };
     interface HTMLSVotingCardElement extends Components.SVotingCard, HTMLStencilElement {
     }
@@ -36,6 +44,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "s-button": HTMLSButtonElement;
+        "s-dashboard": HTMLSDashboardElement;
         "s-voting-card": HTMLSVotingCardElement;
         "s-voting-deck": HTMLSVotingDeckElement;
     }
@@ -44,6 +53,8 @@ declare namespace LocalJSX {
     interface SButton {
         "appearance"?: any;
     }
+    interface SDashboard {
+    }
     interface SVotingCard {
         "value"?: string;
     }
@@ -51,6 +62,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "s-button": SButton;
+        "s-dashboard": SDashboard;
         "s-voting-card": SVotingCard;
         "s-voting-deck": SVotingDeck;
     }
@@ -60,6 +72,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "s-button": LocalJSX.SButton & JSXBase.HTMLAttributes<HTMLSButtonElement>;
+            "s-dashboard": LocalJSX.SDashboard & JSXBase.HTMLAttributes<HTMLSDashboardElement>;
             "s-voting-card": LocalJSX.SVotingCard & JSXBase.HTMLAttributes<HTMLSVotingCardElement>;
             "s-voting-deck": LocalJSX.SVotingDeck & JSXBase.HTMLAttributes<HTMLSVotingDeckElement>;
         }
