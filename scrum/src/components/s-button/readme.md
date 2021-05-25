@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property     | Attribute    | Description | Type  | Default     |
-| ------------ | ------------ | ----------- | ----- | ----------- |
-| `appearance` | `appearance` |             | `any` | `undefined` |
+| Property     | Attribute    | Description | Type     | Default     |
+| ------------ | ------------ | ----------- | -------- | ----------- |
+| `appearance` | `appearance` |             | `string` | `undefined` |
+| `buttontype` | `buttontype` |             | `string` | `undefined` |
 
 
 ## Dependencies

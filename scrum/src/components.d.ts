@@ -7,7 +7,8 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface SButton {
-        "appearance": any;
+        "appearance": string;
+        "buttontype": string;
     }
     interface SDashboard {
     }
@@ -60,12 +61,13 @@ declare global {
 }
 declare namespace LocalJSX {
     interface SButton {
-        "appearance"?: any;
+        "appearance"?: string;
+        "buttontype"?: string;
     }
     interface SDashboard {
     }
     interface SLogin {
-        "onJoinCompleted"?: (event: CustomEvent<boolean>) => void;
+        "onJoinCompleted"?: (event: CustomEvent<any>) => void;
     }
     interface SVotingCard {
         "value"?: string;

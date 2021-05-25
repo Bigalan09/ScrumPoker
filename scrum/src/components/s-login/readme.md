@@ -7,9 +7,9 @@
 
 ## Events
 
-| Event           | Description | Type                   |
-| --------------- | ----------- | ---------------------- |
-| `joinCompleted` |             | `CustomEvent<boolean>` |
+| Event           | Description | Type               |
+| --------------- | ----------- | ------------------ |
+| `joinCompleted` |             | `CustomEvent<any>` |
 
 
 ## Dependencies

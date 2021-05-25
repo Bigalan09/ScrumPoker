@@ -7,10 +7,12 @@ import { Component, h, Listen, State } from '@stencil/core';
 })
 export class SDashboard {
   @State() loggedin: boolean = false;
+  @State() username: string = '';
 
   @Listen('joinCompleted')
-  joinCompletedEventHandler(event: CustomEvent<boolean>) {
-    this.loggedin = event.detail;
+  joinCompletedEventHandler(event: CustomEvent<any>) {
+    this.loggedin = true;
+    this.username = event.detail.username;
   }
 
   render() {
@@ -21,7 +23,7 @@ export class SDashboard {
             <div class="w-full md:w-1/6 px-1">
               <h2 class="text-xl font-semibold">Players</h2>
               <ul class="list-inside list-disc">
-                <li>Alan</li>
+                <li>{this.username}</li>
               </ul>
             </div>
             <div class="w-full md:flex-1 px-1">
@@ -33,9 +35,7 @@ export class SDashboard {
             </div>
           </div>
           :
-          <div class="flex flex-wrap mt-4">
-            <div class="w-full md:flex-1 px-1"><s-login></s-login></div>
-          </div>
+            <s-login></s-login>
         }
       </div>
     );

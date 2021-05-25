@@ -21,3 +21,11 @@
 .btn.secondary:hover {
   @apply bg-green-700;
 }
+
+.btn.tertiary {
+  @apply bg-indigo-500 text-white;
+}
+
+.btn.tertiary:hover {
+  @apply bg-indigo-700;
+}
