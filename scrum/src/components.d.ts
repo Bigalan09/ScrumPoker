@@ -7,8 +7,11 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface SButton {
-        "appearance": string;
-        "buttontype": string;
+        "ariaLabel": string;
+        "disabled"?: boolean;
+        "size"?: 'small' | 'large';
+        "type"?: 'reset' | 'submit' | 'button';
+        "variant"?: string;
     }
     interface SDashboard {
     }
@@ -61,8 +64,11 @@ declare global {
 }
 declare namespace LocalJSX {
     interface SButton {
-        "appearance"?: string;
-        "buttontype"?: string;
+        "ariaLabel"?: string;
+        "disabled"?: boolean;
+        "size"?: 'small' | 'large';
+        "type"?: 'reset' | 'submit' | 'button';
+        "variant"?: string;
     }
     interface SDashboard {
     }

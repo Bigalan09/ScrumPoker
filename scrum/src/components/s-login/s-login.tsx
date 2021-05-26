@@ -39,13 +39,13 @@ export class SLogin {
           <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
             <div class="mb-4">
               <label class="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">Name</label>
-              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="username" type="text" value={this.username} required onInput={(e) => this.handleChange(e)} placeholder="Your name" />
+              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" autocomplete="off" id="username" type="text" value={this.username} required onInput={(e) => this.handleChange(e)} placeholder="Your name" />
             </div><div class="mb-4">
               <label class="block text-grey-darker text-sm font-bold mb-2" htmlFor="roomid">Room ID <span class="italic">(Optional)</span></label>
               <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="roomid" type="text" value={this.roomid} onInput={(e) => this.handleChange(e)} placeholder="------" />
             </div>
             <div class="mb-6">
-              <s-button buttontype="submit" appearance="tertiary">Join</s-button>
+              <s-button type="submit" variant="tertiary">Join</s-button>
             </div>
           </div>
         </div>

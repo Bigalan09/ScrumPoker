@@ -30,8 +30,8 @@ export class SDashboard {
               <s-voting-deck></s-voting-deck>
             </div>
             <div class="w-full md:w-1/5 px-1">
-              <s-button appearance="primary">Start Voting</s-button>
-              <s-button appearance="secondary">Finish Voting</s-button>
+              <s-button variant="primary">Start Voting</s-button>
+              <s-button variant="secondary">Finish Voting</s-button>
             </div>
           </div>
           :

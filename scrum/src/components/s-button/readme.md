@@ -7,10 +7,13 @@
 
 ## Properties
 
-| Property     | Attribute    | Description | Type     | Default     |
-| ------------ | ------------ | ----------- | -------- | ----------- |
-| `appearance` | `appearance` |             | `string` | `undefined` |
-| `buttontype` | `buttontype` |             | `string` | `undefined` |
+| Property    | Attribute    | Description | Type                              | Default     |
+| ----------- | ------------ | ----------- | --------------------------------- | ----------- |
+| `ariaLabel` | `aria-label` |             | `string`                          | `undefined` |
+| `disabled`  | `disabled`   |             | `boolean`                         | `false`     |
+| `size`      | `size`       |             | `"large" \| "small"`              | `'large'`   |
+| `type`      | `type`       |             | `"button" \| "reset" \| "submit"` | `undefined` |
+| `variant`   | `variant`    |             | `string`                          | `'primary'` |
 
 
 ## Dependencies
