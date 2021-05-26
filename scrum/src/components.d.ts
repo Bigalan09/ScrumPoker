@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { InputChangeEventDetail } from "./components/s-voting-card/s-voting-card";
 export namespace Components {
     interface SButton {
         "ariaLabel": string;
@@ -19,9 +20,11 @@ export namespace Components {
     }
     interface SVotingCard {
         "checked"?: boolean;
+        "disabled"?: boolean;
         "value": string;
     }
     interface SVotingDeck {
+        "value"?: string;
     }
 }
 declare global {
@@ -78,9 +81,12 @@ declare namespace LocalJSX {
     }
     interface SVotingCard {
         "checked"?: boolean;
+        "disabled"?: boolean;
+        "onSelected"?: (event: CustomEvent<InputChangeEventDetail>) => void;
         "value"?: string;
     }
     interface SVotingDeck {
+        "value"?: string;
     }
     interface IntrinsicElements {
         "s-button": SButton;

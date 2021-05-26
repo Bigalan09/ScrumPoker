@@ -1,4 +1,4 @@
-import { r as registerInstance, h } from './index-32126c12.js';
+import { r as registerInstance, h } from './index-7303f0d4.js';
 
 const sDashboardCss = ":host{display:block}";
 

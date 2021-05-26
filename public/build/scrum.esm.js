@@ -1,4 +1,4 @@
-import { B as BUILD, c as consoleDevInfo, p as plt, w as win, H, d as doc, N as NAMESPACE, a as promiseResolve, b as bootstrapLazy } from './index-32126c12.js';
+import { B as BUILD, c as consoleDevInfo, p as plt, w as win, H, d as doc, N as NAMESPACE, a as promiseResolve, b as bootstrapLazy } from './index-7303f0d4.js';
 import { g as globalScripts } from './app-globals-0f993ce5.js';
 
 /*
@@ -118,5 +118,5 @@ const patchCloneNodeFix = (HTMLElementPrototype) => {
 
 patchBrowser().then(options => {
   globalScripts();
-  return bootstrapLazy([["s-login",[[0,"s-login",{"username":[32],"roomid":[32]}]]],["s-voting-deck",[[0,"s-voting-deck"]]],["s-button",[[1,"s-button",{"size":[1],"variant":[1],"disabled":[4],"type":[1],"ariaLabel":[1,"aria-label"]},[[2,"click","handleHostClick"]]]]],["s-voting-card",[[0,"s-voting-card",{"value":[1],"checked":[1540]}]]],["s-dashboard",[[0,"s-dashboard",{"loggedin":[32],"username":[32]},[[0,"joinCompleted","joinCompletedEventHandler"]]]]]], options);
+  return bootstrapLazy([["s-login",[[0,"s-login",{"username":[32],"roomid":[32]}]]],["s-voting-deck",[[0,"s-voting-deck",{"value":[1537]}]]],["s-button",[[1,"s-button",{"size":[1],"variant":[1],"disabled":[4],"type":[1],"ariaLabel":[1,"aria-label"]},[[2,"click","handleHostClick"]]]]],["s-voting-card",[[0,"s-voting-card",{"disabled":[4],"checked":[1540],"value":[1025]}]]],["s-dashboard",[[0,"s-dashboard",{"loggedin":[32],"username":[32]},[[0,"joinCompleted","joinCompletedEventHandler"]]]]]], options);
 });
