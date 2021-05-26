@@ -1,0 +1,20 @@
+{
+  "name": "scrumpoker",
+  "version": "1.0.0",
+  "description": "Online Scrum voting poker using Firebase.",
+  "main": "index.js",
+  "scripts": {
+    "run": "cd \"./scrum/\" && npm start",
+    "emulate": "cd \"./scrum/\" && npm run build && cd ../ && firebase emulators:start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bigalan09/ScrumPoker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bigalan09/ScrumPoker/issues"
+  },
+  "homepage": "https://github.com/Bigalan09/ScrumPoker#readme"
+}

@@ -1,1 +1,10 @@
-<!doctype html><html dir="ltr" lang="en"><head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"> <title>Scrum Voting Poker</title> <link rel="stylesheet" href="/build/p-ecf6306b.css"> <link rel="modulepreload" href="/build/p-dd68bc45.js"><script type="module" src="/build/p-dd68bc45.js" data-stencil data-resources-url="/build/" data-stencil-namespace="scrum"></script> <script nomodule="" src="/build/scrum.js" data-stencil></script> </head> <body class="dark"> <div class="container mx-auto px-4"> <h1 class="text-4xl font-extralight text-center leading-6 mt-6">Voting Poker</h1> <s-dashboard></s-dashboard> </div> </body></html>
+<!doctype html><html dir="ltr" lang="en"><head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"> <title>Scrum Voting Poker</title> <link rel="stylesheet" href="/build/scrum.css"> <script type="module" src="/build/scrum.esm.js" data-stencil></script> <script nomodule="" src="/build/scrum.js" data-stencil></script> </head> <body class="dark"> <div class="container mx-auto px-4"> <h1 class="text-4xl font-extralight text-center leading-6 mt-6">Voting Poker</h1> <s-dashboard></s-dashboard> </div> <script>
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  // auto-unregister service worker during dev mode
+  navigator.serviceWorker.getRegistration().then(function(registration) {
+  if (registration) {
+    registration.unregister().then(function() { location.reload(true) });
+  }
+  });
+}
+</script></body></html>

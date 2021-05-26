@@ -18,6 +18,7 @@ export namespace Components {
     interface SLogin {
     }
     interface SVotingCard {
+        "checked"?: boolean;
         "value": string;
     }
     interface SVotingDeck {
@@ -76,6 +77,7 @@ declare namespace LocalJSX {
         "onJoinCompleted"?: (event: CustomEvent<any>) => void;
     }
     interface SVotingCard {
+        "checked"?: boolean;
         "value"?: string;
     }
     interface SVotingDeck {

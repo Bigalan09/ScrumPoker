@@ -1,7 +1,3 @@
-:host {
-  display: block;
-}
-
 .card input[type=radio] {
   height: 0;
   visibility: hidden;

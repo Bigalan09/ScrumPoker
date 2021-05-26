@@ -1,4 +1,4 @@
-import { Component, h } from '@stencil/core';
+import { Component, h, Host } from '@stencil/core';
 
 @Component({
   tag: 's-voting-deck',
@@ -11,11 +11,15 @@ export class SVotingDeck {
 
   render() {
     return (
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-2 mb-3">
-        {this._sequence.map((val) =>
-          <s-voting-card key={val} value={val}></s-voting-card>
-        )}
-      </div>
+      <Host>
+        <form>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-2 mb-3">
+            {this._sequence.map((val) =>
+              <s-voting-card key={val} value={val}></s-voting-card>
+            )}
+          </div>
+        </form>
+      </Host>
     );
   }
 
