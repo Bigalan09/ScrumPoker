@@ -15,8 +15,6 @@ const SVotingDeck = class {
       { key: '8', checked: false },
       { key: '13', checked: false },
       { key: '20', checked: false },
-      { key: '40', checked: false },
-      { key: '?', checked: false },
       { key: '☕', checked: false }
     ];
   }
