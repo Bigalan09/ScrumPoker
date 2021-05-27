@@ -1,4 +1,4 @@
-import { Component, h, Listen, State } from '@stencil/core';
+import { Component, h, Listen, Prop, State } from '@stencil/core';
 
 @Component({
   tag: 's-dashboard',
@@ -8,6 +8,20 @@ import { Component, h, Listen, State } from '@stencil/core';
 export class SDashboard {
   @State() loggedin: boolean = false;
   @State() username: string = '';
+  @State() userId: string = '';
+  @Prop() firebase: any;
+
+  componentWillLoad() {
+    this.firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.userId = user.uid;
+      } else {
+        this.userId = null;
+        this.username = null;
+        this.loggedin = false;
+      }
+    });
+  }
 
   @Listen('joinCompleted')
   joinCompletedEventHandler(event: CustomEvent<any>) {
@@ -35,7 +49,7 @@ export class SDashboard {
             </div>
           </div>
           :
-            <s-login></s-login>
+            <s-login firebase={this.firebase}></s-login>
         }
       </div>
     );

@@ -1,4 +1,4 @@
-import { r as registerInstance, e as createEvent, h } from './index-7303f0d4.js';
+import { r as registerInstance, e as createEvent, h } from './index-9f98b401.js';
 
 const sLoginCss = ":host{display:block}";
 
@@ -9,9 +9,19 @@ const SLogin = class {
   }
   handleSubmit(e) {
     e.preventDefault();
-    this.joinCompleted.emit({
-      username: this.username,
-      roomid: this.roomid,
+    this.firebase.auth().signInAnonymously()
+      .then(() => {
+      // Signed in..
+      this.joinCompleted.emit({
+        username: this.username,
+        roomid: this.roomid,
+      });
+    })
+      .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+      // ...
     });
   }
   handleChange(event) {

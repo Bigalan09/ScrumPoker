@@ -1,4 +1,4 @@
-import { Component, Event, h, EventEmitter, State } from '@stencil/core';
+import { Component, Event, h, EventEmitter, State, Prop } from '@stencil/core';
 
 @Component({
   tag: 's-login',
@@ -9,6 +9,8 @@ export class SLogin {
   @State() username: string;
   @State() roomid: string;
 
+  @Prop() firebase: any;
+
   @Event({
     eventName: 'joinCompleted',
     composed: true,
@@ -18,10 +20,20 @@ export class SLogin {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.joinCompleted.emit({
-      username: this.username,
-      roomid: this.roomid,
-    });
+    this.firebase.auth().signInAnonymously()
+      .then(() => {
+        // Signed in..
+        this.joinCompleted.emit({
+          username: this.username,
+          roomid: this.roomid,
+        });
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        // ...
+      });
   }
 
   handleChange(event) {

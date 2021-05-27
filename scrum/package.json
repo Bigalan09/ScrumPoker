@@ -22,7 +22,8 @@
     "generate": "stencil generate"
   },
   "dependencies": {
-    "@stencil/core": "^2.0.1"
+    "@stencil/core": "^2.0.1",
+    "firebase": "^8.6.2"
   },
   "license": "MIT",
   "devDependencies": {

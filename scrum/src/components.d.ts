@@ -15,8 +15,10 @@ export namespace Components {
         "variant"?: string;
     }
     interface SDashboard {
+        "firebase": any;
     }
     interface SLogin {
+        "firebase": any;
     }
     interface SVotingCard {
         "checked"?: boolean;
@@ -75,8 +77,10 @@ declare namespace LocalJSX {
         "variant"?: string;
     }
     interface SDashboard {
+        "firebase"?: any;
     }
     interface SLogin {
+        "firebase"?: any;
         "onJoinCompleted"?: (event: CustomEvent<any>) => void;
     }
     interface SVotingCard {
