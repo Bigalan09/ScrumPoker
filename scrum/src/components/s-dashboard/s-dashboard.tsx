@@ -11,10 +11,21 @@ export class SDashboard {
   @State() userId: string = '';
   @Prop() firebase: any;
 
-  componentWillLoad() {
-    this.firebase.auth().onAuthStateChanged((user) => {
+  async componentWillLoad() {
+    this.firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
-        this.userId = user.uid;
+        if (this.username) {
+          this.writeUserData(user.uid, this.username);
+          this.loggedin = true;
+          this.userId = user.uid;
+        } else {
+          const userData = await this.getUserData(user.uid);
+          if (userData) {
+            this.username = userData.username;
+            this.loggedin = true;
+            this.userId = user.uid;
+          }
+        }
       } else {
         this.userId = null;
         this.username = null;
@@ -23,9 +34,28 @@ export class SDashboard {
     });
   }
 
+  writeUserData(userId, name) {
+    this.firebase.database().ref('users/' + userId).set({
+      username: name,
+    });
+  }
+
+  getUserData(userId) {
+    const dbRef = this.firebase.database().ref();
+    return dbRef.child("users").child(userId).get().then((snapshot) => {
+      if (snapshot.exists()) {
+        return snapshot.val();
+      } else {
+        return null;
+      }
+    }).catch((error) => {
+      console.error(error);
+      return null;
+    });
+  }
+
   @Listen('joinCompleted')
   joinCompletedEventHandler(event: CustomEvent<any>) {
-    this.loggedin = true;
     this.username = event.detail.username;
   }
 
@@ -49,7 +79,7 @@ export class SDashboard {
             </div>
           </div>
           :
-            <s-login firebase={this.firebase}></s-login>
+          <s-login firebase={this.firebase}></s-login>
         }
       </div>
     );

@@ -118,5 +118,5 @@ const patchCloneNodeFix = (HTMLElementPrototype) => {
 
 patchBrowser().then(options => {
   globalScripts();
-  return bootstrapLazy([["s-login",[[0,"s-login",{"firebase":[8],"username":[32],"roomid":[32]}]]],["s-voting-deck",[[0,"s-voting-deck",{"value":[1537]}]]],["s-button",[[1,"s-button",{"size":[1],"variant":[1],"disabled":[4],"type":[1],"ariaLabel":[1,"aria-label"]},[[2,"click","handleHostClick"]]]]],["s-voting-card",[[0,"s-voting-card",{"disabled":[4],"checked":[1540],"value":[1025]}]]],["s-dashboard",[[0,"s-dashboard",{"firebase":[8],"loggedin":[32],"username":[32],"userId":[32]},[[0,"joinCompleted","joinCompletedEventHandler"]]]]]], options);
+  return bootstrapLazy([["s-login",[[0,"s-login",{"firebase":[8],"username":[32],"roomid":[32],"joining":[32]}]]],["s-voting-deck",[[0,"s-voting-deck",{"value":[1537]}]]],["s-button",[[1,"s-button",{"size":[1],"variant":[1],"disabled":[516],"type":[1],"ariaLabel":[1,"aria-label"]},[[2,"click","handleHostClick"]]]]],["s-voting-card",[[0,"s-voting-card",{"disabled":[4],"checked":[1540],"value":[1025]}]]],["s-dashboard",[[0,"s-dashboard",{"firebase":[8],"loggedin":[32],"username":[32],"userId":[32]},[[0,"joinCompleted","joinCompletedEventHandler"]]]]]], options);
 });

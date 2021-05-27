@@ -11,7 +11,7 @@ export class SButton {
 
   @Prop() size?: 'small' | 'large' = 'large';
   @Prop() variant?: string = 'primary';
-  @Prop() disabled?: boolean = false;
+  @Prop({reflect: true}) disabled?: boolean = false;
   @Prop() type?: 'reset' | 'submit' | 'button';
   @Prop() ariaLabel: string;
 

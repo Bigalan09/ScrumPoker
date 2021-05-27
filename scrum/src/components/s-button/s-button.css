@@ -25,3 +25,11 @@
 .button--tertiary:hover {
   @apply bg-indigo-700;
 }
+
+.button--disabled {
+  @apply bg-gray-500;
+}
+
+.button--disabled:hover {
+  @apply bg-gray-600;
+}
