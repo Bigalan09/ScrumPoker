@@ -1,4 +1,4 @@
-import { r as registerInstance, e as createEvent, h } from './index-9f98b401.js';
+import { r as registerInstance, f as createEvent, h } from './index-9c17f99b.js';
 
 const sLoginCss = ":host{display:block}";
 

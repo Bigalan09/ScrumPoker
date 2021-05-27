@@ -1,4 +1,4 @@
-import { Component, h, Listen, Prop, State } from '@stencil/core';
+import { Component, h, Listen, Prop, Host, State } from '@stencil/core';
 
 @Component({
   tag: 's-dashboard',
@@ -6,16 +6,20 @@ import { Component, h, Listen, Prop, State } from '@stencil/core';
   shadow: false,
 })
 export class SDashboard {
+  @State() loading: boolean = true;
   @State() loggedin: boolean = false;
   @State() username: string = '';
+  @State() roomId: string = '';
   @State() userId: string = '';
+
   @Prop() firebase: any;
 
   async componentWillLoad() {
+    this.loading = true;
     this.firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
         if (this.username) {
-          this.writeUserData(user.uid, this.username);
+          await this.writeUserData(user.uid, this.username);
           this.loggedin = true;
           this.userId = user.uid;
         } else {
@@ -31,18 +35,19 @@ export class SDashboard {
         this.username = null;
         this.loggedin = false;
       }
+      this.loading = false;
     });
   }
 
-  writeUserData(userId, name) {
-    this.firebase.database().ref('users/' + userId).set({
+  async writeUserData(userId, name) {
+    await this.firebase.database().ref('users/' + userId).set({
       username: name,
     });
   }
 
   getUserData(userId) {
     const dbRef = this.firebase.database().ref();
-    return dbRef.child("users").child(userId).get().then((snapshot) => {
+    return dbRef.child(`users/${userId}`).get().then((snapshot) => {
       if (snapshot.exists()) {
         return snapshot.val();
       } else {
@@ -57,31 +62,39 @@ export class SDashboard {
   @Listen('joinCompleted')
   joinCompletedEventHandler(event: CustomEvent<any>) {
     this.username = event.detail.username;
+    this.roomId = event.detail.roomId;
   }
 
   render() {
     return (
-      <div>
-        {this.loggedin ?
-          <div class="flex flex-wrap mt-4">
-            <div class="w-full md:w-1/6 px-1">
-              <h2 class="text-xl font-semibold">Players</h2>
-              <ul class="list-inside list-disc">
-                <li>{this.username}</li>
-              </ul>
-            </div>
-            <div class="w-full md:flex-1 px-1">
-              <s-voting-deck></s-voting-deck>
-            </div>
-            <div class="w-full md:w-1/5 px-1">
-              <s-button variant="primary">Start Voting</s-button>
-              <s-button variant="secondary">Finish Voting</s-button>
-            </div>
+      <Host>
+        {this.loading ?
+          <div>
+            Loading...
+        </div> :
+          <div>
+            {this.loggedin ?
+              <div class="flex flex-wrap mt-4">
+                <div class="w-full md:w-1/6 px-1">
+                  <h2 class="text-xl font-semibold">Players</h2>
+                  <ul class="list-inside list-disc">
+                    <li>{this.username}</li>
+                  </ul>
+                </div>
+                <div class="w-full md:flex-1 px-1">
+                  <s-voting-deck></s-voting-deck>
+                </div>
+                <div class="w-full md:w-1/5 px-1">
+                  <s-button variant="primary">Start Voting</s-button>
+                  <s-button variant="secondary">Finish Voting</s-button>
+                </div>
+              </div>
+              :
+              <s-login firebase={this.firebase}></s-login>
+            }
           </div>
-          :
-          <s-login firebase={this.firebase}></s-login>
         }
-      </div>
+      </Host>
     );
   }
 

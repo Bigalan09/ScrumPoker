@@ -1,23 +1,8 @@
-<!doctype html><html dir="ltr" lang="en"><head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"> <title>Scrum Voting Poker</title> <script defer="" src="/__/firebase/8.6.1/firebase-app.js"></script> <!-- include only the Firebase features as you need --> <script defer="" src="/__/firebase/8.6.1/firebase-auth.js"></script> <script defer="" src="/__/firebase/8.6.1/firebase-database.js"></script> <script defer="" src="/__/firebase/8.6.1/firebase-firestore.js"></script> <script defer="" src="/__/firebase/8.6.1/firebase-remote-config.js"></script> <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    --> <script defer="" src="/__/firebase/init.js?useEmulator=true"></script> <link rel="stylesheet" href="/build/scrum.css"> <script type="module" src="/build/scrum.esm.js" data-stencil></script> <script nomodule="" src="/build/scrum.js" data-stencil></script> </head> <body class="dark"> <div class="container mx-auto px-4"> <h1 class="text-4xl font-extralight text-center leading-6 mt-6">Voting Poker</h1> <s-dashboard id="dashboard"></s-dashboard> </div> <script>
+<!doctype html><html dir="ltr" lang="en"><head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"> <title>Scrum Voting Poker</title> <script defer="" src="/__/firebase/8.6.1/firebase-app.js"></script> <script defer="" src="/__/firebase/8.6.1/firebase-auth.js"></script> <script defer="" src="/__/firebase/8.6.1/firebase-database.js"></script> <script defer="" src="/__/firebase/8.6.1/firebase-firestore.js"></script> <script defer="" src="/__/firebase/8.6.1/firebase-remote-config.js"></script> <script defer="" src="/__/firebase/init.js?useEmulator=true"></script> <link rel="stylesheet" href="/build/scrum.css"> <script type="module" src="/build/scrum.esm.js" data-stencil></script> <script nomodule="" src="/build/scrum.js" data-stencil></script> </head> <body class="dark"> <div class="container mx-auto px-4"> <h1 class="text-4xl font-extralight text-center leading-6 mt-6">Voting Poker</h1> <s-dashboard id="dashboard"></s-dashboard> </div> <script>
     document.addEventListener('DOMContentLoaded', function () {
       try {
         let app = firebase.app();
-        let features = [
-          'auth',
-          'database',
-          'firestore',
-          'remoteConfig',
-        ].filter(feature => typeof app[feature] === 'function');
-        /*
-        const db = firebase.firestore();
-        if (location.hostname === "localhost") {
-          // Point to the RTDB emulator running on localhost.
-          db.useEmulator("localhost", 9000);
-        }
-        */
+        
         document.querySelector('#dashboard').firebase = firebase;
       } catch (e) {
         console.error(e);

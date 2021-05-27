@@ -1,4 +1,4 @@
-import { r as registerInstance, h, f as Host } from './index-9f98b401.js';
+import { r as registerInstance, h, e as Host } from './index-9c17f99b.js';
 
 const sVotingDeckCss = "";
 
