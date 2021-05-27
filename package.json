@@ -4,7 +4,7 @@
   "description": "Online Scrum voting poker using Firebase.",
   "main": "index.js",
   "scripts": {
-    "build": "cd \"./scrum/\" && npm build",
+    "build": "cd \"./scrum/\" && npm run build",
     "emulate": "cd \"./scrum/\" && npm run build && cd ../ && firebase emulators:start"
   },
   "repository": {
