@@ -11,11 +11,13 @@ export class SDashboard {
   @State() username: string = '';
   @State() roomId: string = '';
   @State() userId: string = '';
+  @State() db: any;
 
   @Prop() firebase: any;
 
   async componentWillLoad() {
     this.loading = true;
+    this.db = this.firebase.firestore();
     this.firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
         if (this.username) {
@@ -40,15 +42,13 @@ export class SDashboard {
   }
 
   async writeUserData(userId, name) {
-    const db = firebase.firestore();
-    await db.collection('users').doc(userId).set({
+    await this.db.collection('users').doc(userId).set({
       username: name,
     });
   }
 
   getUserData(userId) {
-    const db = firebase.firestore();
-    const docRef = db.collection("users").doc(userId);
+    const docRef = this.db.collection("users").doc(userId);
 
     return docRef.get().then((doc) => {
       if (doc.exists) {
