@@ -40,16 +40,17 @@ export class SDashboard {
   }
 
   async writeUserData(userId, name) {
-    await this.firebase.database().ref('users/' + userId).set({
+    await this.firebase.firestore().collection('users').doc(userId).add({
       username: name,
     });
   }
 
   getUserData(userId) {
-    const dbRef = this.firebase.database().ref();
-    return dbRef.child(`users/${userId}`).get().then((snapshot) => {
-      if (snapshot.exists()) {
-        return snapshot.val();
+    const docRef = this.firebase.firestore().collection("users").doc(userId);
+
+    return docRef.get().then((doc) => {
+      if (doc.exists) {
+        return snapshot.data();
       } else {
         return null;
       }
