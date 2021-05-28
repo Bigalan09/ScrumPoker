@@ -50,7 +50,7 @@ export class SDashboard {
 
     return docRef.get().then((doc) => {
       if (doc.exists) {
-        return snapshot.data();
+        return doc.data();
       } else {
         return null;
       }
