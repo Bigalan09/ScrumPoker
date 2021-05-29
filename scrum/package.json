@@ -2,20 +2,9 @@
   "name": "scrum",
   "version": "0.0.1",
   "description": "Stencil Component Starter",
-  "main": "dist/index.cjs.js",
-  "module": "dist/custom-elements/index.js",
-  "es2015": "dist/esm/index.mjs",
-  "es2017": "dist/esm/index.mjs",
-  "types": "dist/custom-elements/index.d.ts",
-  "collection": "dist/collection/collection-manifest.json",
-  "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/scrum/scrum.esm.js",
-  "files": [
-    "dist/",
-    "loader/"
-  ],
+  "private": true,
   "scripts": {
-    "build": "stencil build --docs",
+    "build": "stencil build",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
@@ -23,6 +12,7 @@
   },
   "dependencies": {
     "@stencil/core": "^2.0.1",
+    "@stencil/router": "^1.0.1",
     "firebase": "^8.6.2"
   },
   "license": "MIT",

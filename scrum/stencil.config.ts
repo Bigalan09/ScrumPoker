@@ -16,20 +16,12 @@ const purge = purgecss({
 export const config: Config = {
   namespace: 'scrum',
   globalStyle: 'src/global/scrum.css',
+  taskQueue: 'async',
   outputTargets: [
-    {
-      type: 'dist',
-      esmLoaderPath: '../loader',
-    },
-    {
-      type: 'dist-custom-elements-bundle',
-    },
-    {
-      type: 'docs-readme',
-    },
     {
       type: 'www',
       serviceWorker: null, // disable service workers
+      baseUrl: 'https://myapp.local/',
       dir: '../public'
     },
   ],
