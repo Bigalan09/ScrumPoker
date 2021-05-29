@@ -1,8 +1,8 @@
-:host .button {
+.button {
   @apply font-bold py-2 px-4 rounded border-0 shadow mt-1 mb-1 w-full uppercase;
 }
 
-:host .button--primary {
+.button--primary {
   @apply bg-red-500 text-white;
 }
 
