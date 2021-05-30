@@ -45,6 +45,12 @@ export class SDashboard {
     await this.db.collection('users').doc(userId).set({
       username: name,
     });
+    this.firebase.functions().httpsCallable('joinRoom')
+      .joinRoom({ roomId: this.roomId })
+      .then((result) => {
+        this.roomId = result;
+        console.log(this.roomId);
+      });
   }
 
   getUserData(userId) {
