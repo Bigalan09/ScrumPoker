@@ -6,6 +6,8 @@ const firestore = admin.firestore();
 
 export const joinRoom =
     functions.https.onCall((data, context) => {
+        functions.logger.log("data: ", data);
+        functions.logger.log("context: ", context);
         const roomId = data.roomId;
         let record: any = {};
         if (context.auth != null) {
@@ -13,7 +15,7 @@ export const joinRoom =
             record[uid] = true;
         }
         const collection = firestore.collection('rooms');
-        if (roomId) {
+        if (roomId != null || roomId != undefined) {
             collection.doc(roomId).set(record, { merge: true }).then((docRef) => {
                 return roomId;
             });
