@@ -94,6 +94,7 @@ export class SDashboard {
                   <s-voting-deck></s-voting-deck>
                 </div>
                 <div class="w-full md:w-1/5 px-1">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" autocomplete="off" id="roomid" type="text" readOnly={true} value={this.roomId} />
                   <s-button variant="primary">Start Voting</s-button>
                   <s-button variant="secondary">Finish Voting</s-button>
                 </div>
