@@ -49,7 +49,8 @@ export class SDashboard {
         this.roomId = result;
         console.log(this.roomId);
         this.loggedin = true;
-      });
+      })
+      .catch(err => console.error(err));
   }
 
   getUserData(userId) {
