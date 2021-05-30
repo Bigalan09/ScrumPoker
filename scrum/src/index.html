@@ -28,6 +28,7 @@
     document.addEventListener('DOMContentLoaded', function () {
       try {
         let app = firebase.app();
+        firebase.functions();
         
         document.querySelector('#dashboard').firebase = firebase;
       } catch (e) {
