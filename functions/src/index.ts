@@ -6,23 +6,27 @@ const firestore = admin.firestore();
 
 export const joinRoom =
     functions.https.onCall((data, context) => {
-        functions.logger.log("data: ", data);
-        functions.logger.log("context: ", context);
         const roomId = data.roomId;
-        let record: any = {};
+        let record: any = {
+            roomId
+        };
         if (context.auth != null) {
             const uid: string = `${context.auth?.uid}`;
             record[uid] = true;
         }
         const collection = firestore.collection('rooms');
         if (roomId != null || roomId != undefined) {
-            collection.doc(roomId).set(record, { merge: true }).then((docRef) => {
+            return collection.doc(roomId).set(record, { merge: true }).then((docRef) => {
                 return roomId;
+            }).catch(err => {
+                functions.logger.log("set err: ", err);
             });
         } else {
-            collection.add(record).then((docRef) => {
+            return collection.add(record).then((docRef) => {
                 return docRef.id;
-            })
+            }).catch(err => {
+                functions.logger.log("add err: ", err);
+            });
         }
     });
 
