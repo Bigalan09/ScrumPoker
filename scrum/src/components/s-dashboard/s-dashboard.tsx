@@ -22,13 +22,11 @@ export class SDashboard {
       if (user) {
         if (this.username) {
           await this.writeUserData(user.uid, this.username);
-          this.loggedin = true;
           this.userId = user.uid;
         } else {
           const userData = await this.getUserData(user.uid);
           if (userData) {
             this.username = userData.username;
-            this.loggedin = true;
             this.userId = user.uid;
           }
         }
@@ -50,6 +48,7 @@ export class SDashboard {
       .then((result) => {
         this.roomId = result;
         console.log(this.roomId);
+        this.loggedin = true;
       });
   }
 
