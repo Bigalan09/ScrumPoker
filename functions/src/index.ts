@@ -6,6 +6,14 @@ const firestore = admin.firestore();
 
 export const joinRoom =
     functions.https.onCall((data, context) => {
+        /*
+        if (context.app == undefined) {
+            throw new functions.https.HttpsError(
+                'failed-precondition',
+                'The function must be called from an App Check verified app.')
+        }
+        */
+
         const roomId = data.roomId;
         let record: any = {
             roomId
@@ -15,19 +23,22 @@ export const joinRoom =
             record[uid] = true;
         }
         const collection = firestore.collection('rooms');
+        let res = null;
         if (roomId != null || roomId != undefined) {
-            return collection.doc(roomId).set(record, { merge: true }).then((docRef) => {
-                return roomId;
+            res = collection.doc(roomId).set(record, { merge: true }).then((docRef) => {
+                return Promise.resolve(roomId);
             }).catch(err => {
                 functions.logger.log("set err: ", err);
             });
         } else {
-            return collection.add(record).then((docRef) => {
-                return docRef.id;
+            res = collection.add(record).then((docRef) => {
+                return Promise.resolve(docRef.id);
             }).catch(err => {
                 functions.logger.log("add err: ", err);
             });
         }
+        res.then(d => console.log(d));
+        return res;
     });
 
 export const getUsersInRoom =

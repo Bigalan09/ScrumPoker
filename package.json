@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/Bigalan09/ScrumPoker/issues"
   },
-  "homepage": "https://github.com/Bigalan09/ScrumPoker#readme"
+  "homepage": "https://github.com/Bigalan09/ScrumPoker#readme",
+  "dependencies": {
+    "firebase-admin": "^9.9.0",
+    "firebase-functions": "^3.14.1"
+  }
 }
