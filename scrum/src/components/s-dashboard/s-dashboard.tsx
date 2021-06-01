@@ -37,6 +37,7 @@ export class SDashboard {
       }
       this.loading = false;
     });
+
   }
 
   async writeUserData(userId, name) {
@@ -47,8 +48,14 @@ export class SDashboard {
     joinRoom({ roomId: this.roomId })
       .then((result) => {
         this.roomId = result.result;
-        console.log(this.roomId);
+        console.log('roomID: ', this.roomId);
         this.loggedin = true;
+        if (this.roomId) {
+          this.db.collection("rooms").doc(this.roomId)
+            .onSnapshot((doc) => {
+              console.log("Current data: ", doc.data());
+            });
+        }
       })
       .catch(err => console.error(err));
   }
