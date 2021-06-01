@@ -7,7 +7,7 @@ import { Component, Event, h, EventEmitter, State, Prop } from '@stencil/core';
 })
 export class SLogin {
   @State() username: string;
-  @State() roomid: string;
+  @State() roomId: string;
   @State() joining: boolean;
 
   @Prop() firebase: any;
@@ -27,7 +27,7 @@ export class SLogin {
         // Signed in..
         this.joinCompleted.emit({
           username: this.username,
-          roomid: this.roomid,
+          roomId: this.roomId,
         });
       })
       .catch((error) => {
@@ -48,7 +48,7 @@ export class SLogin {
   }
 
   handleRoomIdChange(event) {
-    this.roomid = event.target.value;
+    this.roomId = event.target.value;
 
     if (event.target.validity.typeMismatch) {
       console.log('this element is not valid')
@@ -65,7 +65,7 @@ export class SLogin {
               <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" autocomplete="off" id="username" type="text" disabled={this.joining} readOnly={this.joining} value={this.username} required onInput={(e) => this.handleUsernameChange(e)} placeholder="Your name" />
             </div><div class="mb-4">
               <label class="block text-grey-darker text-sm font-bold mb-2" htmlFor="roomid">Room ID <span class="italic">(Optional)</span></label>
-              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="roomid" type="text" value={this.roomid}  disabled={this.joining} readOnly={this.joining} onInput={(e) => this.handleRoomIdChange(e)} placeholder="------" />
+              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="roomid" type="text" value={this.roomId}  disabled={this.joining} readOnly={this.joining} onInput={(e) => this.handleRoomIdChange(e)} placeholder="------" />
             </div>
             <div class="mb-6">
               <s-button type="submit" variant="tertiary" disabled={this.joining}>Join</s-button>
