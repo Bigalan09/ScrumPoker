@@ -37,7 +37,7 @@ export const joinRoom =
                 functions.logger.log("add err: ", err);
             });
         }
-        res.then(d => console.log(d));
+        res.then(d => functions.logger.log("room ID: ", d));
         return res;
     });
 
