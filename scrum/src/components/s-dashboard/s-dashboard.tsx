@@ -21,7 +21,7 @@ export class SDashboard {
     this.firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
         if (this.username) {
-          await this.writeUserData(user.uid, this.username);
+          await this.writeUserData(user.uid, this.username, this.roomId);
           this.userId = user.uid;
         } else {
           const userData = await this.getUserData(user.uid);
@@ -40,12 +40,12 @@ export class SDashboard {
 
   }
 
-  async writeUserData(userId, name) {
+  async writeUserData(userId, name, roomId) {
     await this.db.collection('users').doc(userId).set({
       username: name,
     });
     const joinRoom = this.firebase.functions().httpsCallable('joinRoom');
-    joinRoom({ roomId: this.roomId })
+    joinRoom({ roomId: roomId })
       .then((result) => {
         this.roomId = result.result;
         console.log('roomID: ', this.roomId);
