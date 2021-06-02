@@ -27,7 +27,8 @@ export const joinRoom =
         }
         const collection = firestore.collection('rooms');
         let res = null;
-        if (roomId) {
+        if (roomId != null && roomId != undefined) {
+            functions.logger.log("roomId ", roomId);
             collection.doc(roomId).get().then(snapshot => {
                 record = snapshot.data;
                 record.roomId = roomId;
@@ -45,10 +46,10 @@ export const joinRoom =
             }).catch(err => {
                 functions.logger.log("get err: ", err);
             });
-
         } else {
             res = collection.add(record).then((docRef) => {
-                return Promise.resolve(docRef.id);
+            functions.logger.log("docRef.id ", docRef.id);
+            return Promise.resolve(docRef.id);
             }).catch(err => {
                 functions.logger.log("add err: ", err);
             });
