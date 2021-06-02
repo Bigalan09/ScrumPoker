@@ -47,6 +47,7 @@ export class SDashboard {
     const joinRoom = this.firebase.functions().httpsCallable('joinRoom');
     joinRoom({ roomId: roomId })
       .then((result) => {
+        console.log(result);
         this.roomId = result.data;
         this.loggedin = true;
         if (this.roomId) {
