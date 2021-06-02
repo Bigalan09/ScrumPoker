@@ -16,20 +16,34 @@ export const joinRoom =
 
         const roomId = data.roomId;
         let record: any = {
-            roomId
+            roomId,
+            participants: [],
         };
         if (context.auth != null) {
             const uid: string = `${context.auth?.uid}`;
-            record[uid] = true;
+            record.participants.push(uid);
         }
         const collection = firestore.collection('rooms');
         let res = null;
         if (roomId != null || roomId != undefined) {
-            res = collection.doc(roomId).set(record, { merge: true }).then((docRef) => {
-                return Promise.resolve(roomId);
+            collection.doc(roomId).get().then(snapshot => {
+                record = snapshot.data;
+                record.roomId = roomId;
+                
+                if (context.auth != null) {
+                    const uid: string = `${context.auth?.uid}`;
+                    record.participants.push(uid);
+                }
+
+                res = collection.doc(roomId).set(record).then((docRef) => {
+                    return Promise.resolve(roomId);
+                }).catch(err => {
+                    functions.logger.log("set err: ", err);
+                });
             }).catch(err => {
-                functions.logger.log("set err: ", err);
+                functions.logger.log("get err: ", err);
             });
+            
         } else {
             res = collection.add(record).then((docRef) => {
                 return Promise.resolve(docRef.id);
@@ -37,16 +51,15 @@ export const joinRoom =
                 functions.logger.log("add err: ", err);
             });
         }
-        res.then(d => functions.logger.log("room ID: ", d));
         return res;
     });
 
-export const getUsersInRoom =
+export const getRoom =
     functions.https.onCall(async (data, context) => {
         const roomId = '1';
         const snapshot = await firestore
             .collection(`rooms/${roomId}`)
-            .limit(100)
+            .limit(1)
             .get();
         return snapshot.docs.map(doc => doc.data());
     });
