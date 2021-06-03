@@ -6,8 +6,8 @@ import * as moment from 'moment';
 admin.initializeApp();
 const firestore = admin.firestore();
 
-export const joinRoom =
-    functions.https.onCall((data, context) => {
+export const joinRoom1 =
+    functions.https.onCall(async (data, context) => {
         /*
         if (context.app == undefined) {
             throw new functions.https.HttpsError(
@@ -28,14 +28,25 @@ export const joinRoom =
         const collection = firestore.collection('rooms');
         let res = null;
         if (roomId != null && roomId != undefined) {
-            functions.logger.log("roomId ", roomId);
-            collection.doc(roomId).get().then(snapshot => {
-                record = snapshot.data;
+            res = collection.doc(roomId).get().then(snapshot => {
+
+                if (snapshot.exists) {
+                    record = snapshot.data();
+                } else {
+                    record = {
+                        roomId,
+                        participants: [],
+                    };
+                }
                 record.roomId = roomId;
 
                 if (context.auth != null) {
                     const uid: string = `${context.auth?.uid}`;
-                    record.participants.push(uid);
+                    if (record.participants) {
+                        record.participants.push(uid);
+                    } else {
+                        record.participants = [uid];
+                    }
                 }
 
                 res = collection.doc(roomId).set(record).then((docRef) => {
@@ -48,13 +59,57 @@ export const joinRoom =
             });
         } else {
             res = collection.add(record).then((docRef) => {
-            functions.logger.log("docRef.id ", docRef.id);
-            return Promise.resolve(docRef.id);
+                functions.logger.log("docRef.id ", docRef.id);
+                return Promise.resolve(docRef.id);
             }).catch(err => {
                 functions.logger.log("add err: ", err);
             });
         }
         return res;
+    });
+
+export const joinRoom =
+    functions.https.onCall(async (data, context) => {
+
+        const roomId = data.roomId;
+        let record: any = {
+            roomId,
+            participants: [],
+        };
+        if (context.auth != null) {
+            const uid: string = `${context.auth?.uid}`;
+            record.participants.push(uid);
+        }
+        const collection = firestore.collection('rooms');
+
+        if (roomId != null && roomId != undefined) {
+            const snapshot = await collection.doc(roomId).get();
+            if (snapshot.exists) {
+                record = snapshot.data();
+            } else {
+                record = {
+                    roomId,
+                    participants: [],
+                };
+            }
+            record.roomId = roomId;
+
+            if (context.auth != null) {
+                const uid: string = `${context.auth?.uid}`;
+                if (record.participants) {
+                    record.participants.push(uid);
+                } else {
+                    record.participants = [uid];
+                }
+            }
+
+            await collection.doc(roomId).set(record);
+            return Promise.resolve(roomId);
+        } else {
+            const docRef = await collection.add(record);
+            return Promise.resolve(docRef.id);
+
+        }
     });
 
 export const getRoom =

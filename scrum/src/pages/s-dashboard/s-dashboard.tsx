@@ -44,6 +44,7 @@ export class SDashboard {
     await this.db.collection('users').doc(userId).set({
       username: name,
     });
+    console.log("Joining room");
     const joinRoom = this.firebase.functions().httpsCallable('joinRoom');
     joinRoom({ roomId: roomId })
       .then((result) => {
