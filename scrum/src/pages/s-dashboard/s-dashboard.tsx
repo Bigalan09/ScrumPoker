@@ -153,6 +153,7 @@ export class SDashboard {
   }
 
   fs_listen_online() {
+    var self = this;
     this.firebase.firestore().collection('status')
       .where('state', '==', 'online')
       .onSnapshot(function (snapshot) {
@@ -160,12 +161,12 @@ export class SDashboard {
           if (change.type === 'added') {
             var msg = 'User ' + change.doc.id + ' is online.';
             console.log(msg);
-            this.msghistory.push(msg);
+            self.msghistory.push(msg);
           }
           if (change.type === 'removed') {
             var msg = 'User ' + change.doc.id + ' is offline.';
             console.log(msg);
-            this.msghistory.push(msg);
+            self.msghistory.push(msg);
           }
         });
       });
