@@ -21,6 +21,6 @@
     position: absolute;
 }
 
-.icon-container .status-circle--online {
+.status-circle.status-circle--online {
     background-color: #60d830;
 }
