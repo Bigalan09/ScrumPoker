@@ -12,7 +12,7 @@ export class SDashboard {
   @State() roomId: string = '';
   @State() userId: string = '';
   @State() db: any;
-  @State() users: any = {};
+  @State() data: any = { users: [] };
 
   @Prop() firebase: any;
 
@@ -161,11 +161,13 @@ export class SDashboard {
           const uid = change.doc.id;
           if (change.type === 'added') {
             const user = {uid, online: true};
-            this.users = {...this.users, uid: user };
+            this.data.users.push(user);
+            this.data = {...this.data };
           }
           if (change.type === 'removed') {
             const user = {uid, online: false};
-            this.users = {...this.users, uid: user };
+            this.data.users.push(user);
+            this.data = {...this.data };
           }
         }, this);
       });
@@ -190,8 +192,8 @@ export class SDashboard {
                 <div class="w-full md:w-1/6 px-1">
                   <h2 class="text-xl font-semibold">Players</h2>
                   <ul class="list-inside">
-                    {Object.keys(this.users).map((key, index) => {
-                      return <li key={index}><s-avatar random={true} online={this.users[key].online}></s-avatar> {key}</li>
+                    {this.data.users.map((value, index) => {
+                      return <li key={index}><s-avatar random={true} online={value.online}></s-avatar> {value.uid}</li>
                     })}
                   </ul>
                 </div>
