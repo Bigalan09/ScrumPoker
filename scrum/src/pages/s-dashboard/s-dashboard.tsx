@@ -193,7 +193,7 @@ export class SDashboard {
                   <h2 class="text-xl font-semibold">Players</h2>
                   <ul class="list-inside">
                     {this.data.users.map((value, index) => {
-                      return <li key={index}><s-avatar random={true} online={value.online}></s-avatar> {value.uid}</li>
+                      return <li key={index}><div class="flex flex-row"><s-avatar random={true} online={value.online}></s-avatar><div>{value.uid}</div></div></li>
                     })}
                   </ul>
                 </div>
