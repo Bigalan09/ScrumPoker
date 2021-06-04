@@ -216,7 +216,7 @@ export class SDashboard {
               })}
               </ul>
             </div>
-            <s-avatar online={this.loggedin}></s-avatar>
+            <s-avatar random={true} online={this.loggedin}></s-avatar>
           </div>
         }
       </Host>
