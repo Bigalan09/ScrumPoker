@@ -158,7 +158,6 @@ export class SDashboard {
     this.firebase.firestore().collection('status')
       .where('state', '==', 'online')
       .onSnapshot((snapshot) => {
-        console.log('msg: ', this.msghistory);
         snapshot.docChanges().forEach((change) => {
           if (change.type === 'added') {
             var msg = 'User ' + change.doc.id + ' is online.';
@@ -207,6 +206,7 @@ export class SDashboard {
               <s-login firebase={this.firebase}></s-login>
             }
             <div>
+              {this.msghistory}
               <ul>
               {this.msghistory.map((value, index) => {
                 return <li key={index}>{value}</li>
