@@ -158,21 +158,18 @@ export class SDashboard {
     this.firebase.firestore().collection('status')
       .where('state', '==', 'online')
       .onSnapshot(function (snapshot) {
-        console.log(this.msghistory);
+        console.log('msg: ', this.msghistory);
         snapshot.docChanges().forEach(function (change) {
-          console.log(this);
           if (change.type === 'added') {
             var msg = 'User ' + change.doc.id + ' is online.';
-            console.log(msg);
-            
+            this.msghistory.push(msg);
           }
           if (change.type === 'removed') {
             var msg = 'User ' + change.doc.id + ' is offline.';
-            console.log(msg);
+            this.msghistory.push(msg);
           }
         });
-        this.msghistory = a;
-      });
+      }, this);
   }
 
   @Listen('joinCompleted')
