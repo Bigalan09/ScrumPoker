@@ -161,11 +161,17 @@ export class SDashboard {
         snapshot.docChanges().forEach((change) => {
           if (change.type === 'added') {
             var msg = 'User ' + change.doc.id + ' is online.';
-            this.msghistory.push(msg);
+            this.msghistory = [
+              ...this.msghistory,
+              msg
+            ];
           }
           if (change.type === 'removed') {
             var msg = 'User ' + change.doc.id + ' is offline.';
-            this.msghistory.push(msg);
+            this.msghistory = [
+              ...this.msghistory,
+              msg
+            ];
           }
         }, this);
       });
