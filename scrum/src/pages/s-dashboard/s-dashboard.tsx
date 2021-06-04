@@ -189,7 +189,7 @@ export class SDashboard {
               <div class="flex flex-wrap mt-4">
                 <div class="w-full md:w-1/6 px-1">
                   <h2 class="text-xl font-semibold">Players</h2>
-                  <ul class="list-inside list-disc">
+                  <ul class="list-inside">
                     {Object.keys(this.users).map((key, index) => {
                       return <li key={index}><s-avatar random={true} online={this.users[key].online}></s-avatar> {key}</li>
                     })}
