@@ -190,7 +190,9 @@ export class SDashboard {
                 <div class="w-full md:w-1/6 px-1">
                   <h2 class="text-xl font-semibold">Players</h2>
                   <ul class="list-inside list-disc">
-                    <li>{this.username}</li>
+                    {this.msghistory.map((value, index) => {
+                      return <li key={index}><s-avatar random={true} online={this.loggedin}></s-avatar> {value}</li>
+                    })}
                   </ul>
                 </div>
                 <div class="w-full md:flex-1 px-1">
@@ -205,15 +207,6 @@ export class SDashboard {
               :
               <s-login firebase={this.firebase}></s-login>
             }
-            <div>
-              {this.msghistory}
-              <ul>
-              {this.msghistory.map((value, index) => {
-                return <li key={index}>{value}</li>
-              })}
-              </ul>
-            </div>
-            <s-avatar random={true} online={this.loggedin}></s-avatar>
           </div>
         }
       </Host>
