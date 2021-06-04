@@ -160,9 +160,8 @@ export class SDashboard {
     this.firebase.firestore().collection('status')
       .where('state', '==', 'online')
       .onSnapshot(function (snapshot) {
-        console.log("inside: " + this.msghistory);
+        console.log(this);
         snapshot.docChanges().forEach(function (change) {
-          console.log("inside inside: " + this.msghistory);
           if (change.type === 'added') {
             var msg = 'User ' + change.doc.id + ' is online.';
             console.log(msg);
