@@ -160,14 +160,14 @@ export class SDashboard {
       .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
           if (change.type === 'added') {
-            var msg = 'User ' + change.doc.id + ' is online.';
+            var msg = {uid: change.doc.id, online: true};
             this.msghistory = [
               ...this.msghistory,
               msg
             ];
           }
           if (change.type === 'removed') {
-            var msg = 'User ' + change.doc.id + ' is offline.';
+            var msg = {uid: change.doc.id, online: false};
             this.msghistory = [
               ...this.msghistory,
               msg
@@ -197,7 +197,7 @@ export class SDashboard {
                   <h2 class="text-xl font-semibold">Players</h2>
                   <ul class="list-inside list-disc">
                     {this.msghistory.map((value, index) => {
-                      return <li key={index}><s-avatar random={true} online={this.loggedin}></s-avatar> {value}</li>
+                      return <li key={index}><s-avatar random={true} online={value.online}></s-avatar> {value.uid}</li>
                     })}
                   </ul>
                 </div>
