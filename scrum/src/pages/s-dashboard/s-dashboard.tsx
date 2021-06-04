@@ -12,7 +12,6 @@ export class SDashboard {
   @State() roomId: string = '';
   @State() userId: string = '';
   @State() db: any;
-  @State() userStatusFirestoreRef: any;
   @State() history: string[] = [];
 
   @Prop() firebase: any;
@@ -151,7 +150,7 @@ export class SDashboard {
     };
 
     // [END_EXCLUDE]
-    this.userStatusFirestoreRef = this.firebase.firestore().doc('/status/' + uid);
+    var userStatusFirestoreRef = this.firebase.firestore().doc('/status/' + uid);
 
     // Firestore uses a different server timestamp value, so we'll 
     // create two more constants for Firestore state.
@@ -170,7 +169,7 @@ export class SDashboard {
         // Instead of simply returning, we'll also set Firestore's state
         // to 'offline'. This ensures that our Firestore cache is aware
         // of the switch to 'offline.'
-        this.userStatusFirestoreRef.set(isOfflineForFirestore);
+        userStatusFirestoreRef.set(isOfflineForFirestore);
         return;
       };
 
@@ -178,19 +177,10 @@ export class SDashboard {
         userStatusDatabaseRef.set(isOnlineForDatabase);
 
         // We'll also add Firestore set here for when we come online.
-        this.userStatusFirestoreRef.set(isOnlineForFirestore);
+        userStatusFirestoreRef.set(isOnlineForFirestore);
       });
     });
     // [END rtdb_and_local_fs_presence]
-  }
-
-  fs_listen() {
-    // [START fs_onsnapshot]
-    this.userStatusFirestoreRef.onSnapshot(function (doc) {
-      this.isOnline = doc.data().state == 'online';
-      // ... use isOnline
-    });
-    // [END fs_onsnapshot]
   }
 
   fs_listen_online() {
