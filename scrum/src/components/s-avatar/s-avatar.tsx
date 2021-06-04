@@ -38,13 +38,19 @@ export class SAvatar {
   ];
 
   @Prop() online: boolean = false;
-  @Prop() avatar: number = 0;
+  @Prop() avatar?: number = 0;
+  @Prop() random?: boolean = null;
 
   render() {
+    if (this.random == true) {
+      this.avatar = this.getRandomAvatar();
+    }
+    let avatarPath = getAssetPath(`./assets/svg/${this.getAvatarPath(this.avatar)}`);
+
     return (
         <Host>
         <div class='icon-container'>
-            <img src={getAssetPath(`./assets/svg/${this.getAvatarPath(this.avatar)}`)} />
+            <img src={avatarPath} />
             <div class={this.getCssClassMap()}>
             </div>
         </div>
@@ -62,5 +68,10 @@ export class SAvatar {
       classes.push('status-circle--online');
     }
     return classes.join(' ');
+  }
+
+  getRandomAvatar() {
+    const max = this.avatars.length;
+    return Math.floor(Math.random() * max);
   }
 }
