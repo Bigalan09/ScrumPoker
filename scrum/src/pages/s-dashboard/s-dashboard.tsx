@@ -25,6 +25,7 @@ export class SDashboard {
         this.username = null;
         this.loggedin = false;
       } else {
+        this.loggedin = true;
         this.rtdb_and_local_fs_presence();
         this.fs_listen_online();
       }
