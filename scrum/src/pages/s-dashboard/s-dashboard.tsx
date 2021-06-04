@@ -20,8 +20,13 @@ export class SDashboard {
     this.loading = true;
     this.db = this.firebase.firestore();
     this.firebase.auth().onAuthStateChanged(async (user) => {
-      if (user) {
-        console.log(user.uid);
+      if (!user) {
+        this.userId = null;
+        this.username = null;
+        this.loggedin = false;
+      } else {
+        this.rtdb_and_local_fs_presence();
+        this.fs_listen_online();
       }
       /*
       if (user) {
@@ -42,8 +47,7 @@ export class SDashboard {
         this.loggedin = false;
       }
       */
-      this.rtdb_and_local_fs_presence();
-      this.fs_listen_online();
+
       this.loading = false;
     });
 
