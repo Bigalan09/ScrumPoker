@@ -12,7 +12,7 @@ export class SDashboard {
   @State() roomId: string = '';
   @State() userId: string = '';
   @State() db: any;
-  @State() msghistory: any[] = [];
+  @State() users: any = {};
 
   @Prop() firebase: any;
 
@@ -154,24 +154,19 @@ export class SDashboard {
   }
 
   fs_listen_online() {
-    this.msghistory = [];
+    this.users = {};
     this.firebase.firestore().collection('status')
       .where('state', '==', 'online')
       .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
+          const uid = change.doc.id;
           if (change.type === 'added') {
-            var msg = {uid: change.doc.id, online: true};
-            this.msghistory = [
-              ...this.msghistory,
-              msg
-            ];
+            const user = {uid, online: true};
+            this.users = { ...this.users, uid: user };
           }
           if (change.type === 'removed') {
-            var msg = {uid: change.doc.id, online: false};
-            this.msghistory = [
-              ...this.msghistory,
-              msg
-            ];
+            const user = {uid, online: false};
+            this.users = { ...this.users, uid: user }
           }
         }, this);
       });
@@ -196,7 +191,7 @@ export class SDashboard {
                 <div class="w-full md:w-1/6 px-1">
                   <h2 class="text-xl font-semibold">Players</h2>
                   <ul class="list-inside list-disc">
-                    {this.msghistory.map((value, index) => {
+                    {this.users.map((value, index) => {
                       return <li key={index}><s-avatar random={true} online={value.online}></s-avatar> {value.uid}</li>
                     })}
                   </ul>
