@@ -28,6 +28,7 @@ export class SDashboard {
           if (userData) {
             this.username = userData.username;
             this.userId = user.uid;
+            this.loggedin = true;
           }
         }
       } else {
@@ -44,11 +45,10 @@ export class SDashboard {
     await this.db.collection('users').doc(userId).set({
       username: name,
     });
-    console.log("Joining room");
+    
     const joinRoom = this.firebase.functions().httpsCallable('joinRoom');
     joinRoom({ roomId: roomId })
       .then((result) => {
-        console.log(result);
         this.roomId = result.data;
         this.loggedin = true;
         if (this.roomId) {
