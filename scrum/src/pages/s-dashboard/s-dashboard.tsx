@@ -21,6 +21,9 @@ export class SDashboard {
     this.loading = true;
     this.db = this.firebase.firestore();
     this.firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        console.log(user.uid);
+      }
       /*
       if (user) {
         if (this.username) {
