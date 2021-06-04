@@ -213,8 +213,7 @@ export class SDashboard {
               })}
               </ul>
             </div>
-            <s-avatar online="true"></s-avatar><br />
-            <s-avatar online="false"></s-avatar>
+            <s-avatar online={this.loggedin}></s-avatar>
           </div>
         }
       </Host>
