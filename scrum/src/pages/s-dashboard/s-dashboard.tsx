@@ -157,9 +157,9 @@ export class SDashboard {
     this.msghistory = [];
     this.firebase.firestore().collection('status')
       .where('state', '==', 'online')
-      .onSnapshot(function (snapshot) {
+      .onSnapshot((snapshot) => {
         console.log('msg: ', this.msghistory);
-        snapshot.docChanges().forEach(function (change) {
+        snapshot.docChanges().forEach((change) => {
           if (change.type === 'added') {
             var msg = 'User ' + change.doc.id + ' is online.';
             this.msghistory.push(msg);
@@ -168,8 +168,8 @@ export class SDashboard {
             var msg = 'User ' + change.doc.id + ' is offline.';
             this.msghistory.push(msg);
           }
-        });
-      }, this);
+        }, this);
+      });
   }
 
   @Listen('joinCompleted')
