@@ -206,7 +206,13 @@ export class SDashboard {
               :
               <s-login firebase={this.firebase}></s-login>
             }
-            {this.msghistory}
+            <div>
+              <ul>
+              {this.msghistory.map((value, index) => {
+                return <li key={index}>{value}</li>
+              })}
+              </ul>
+            </div>
             <s-avatar online="true"></s-avatar><br />
             <s-avatar online="false"></s-avatar>
           </div>
